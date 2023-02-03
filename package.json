@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "jir3d-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jorge3004/JIR3D-NODE.git"
+  },
+  "author": "JorgeRivera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorge3004/JIR3D-NODE/issues"
+  },
+  "homepage": "https://github.com/jorge3004/JIR3D-NODE#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
+  },
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
