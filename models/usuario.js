@@ -1,19 +1,91 @@
-const schema ={
-    usuario:{
-        type: "string",
-        required: [true, "El nombre es obligatorio"]
+const { DataTypes } = require('sequelize');
+const { handleConnect } = require('../database/connectionDB');
+
+
+const schema = {
+    uid: {
+        // field: 'GenreId',
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
     },
-    clave:{
-        type: "string",
-        required: [true, "La clave es obligatorio"]
+    usuario: {
+        type: DataTypes.STRING,
+        // required: [true, "El nombre es obligatorio"]
     },
-    rol:{
-        type: "string",
-        required: true,
-        emun:["ADMIN_ROLE","USER_ROLE"]
+    nombre: {
+        type: DataTypes.STRING,
+        // required: [true, "El nombre es obligatorio"]
     },
-    estado:{
-        type: "boolean",
-        default: true,
+    clave: {
+        type: DataTypes.STRING,
+        // required: [true, "La clave es obligatorio"]
     },
-} 
+    tipo: {
+        type: DataTypes.STRING,
+        defaultValue: ""
+        // required: true,
+        // emun: ["ADMIN_ROLE", "USER_ROLE"]
+    },
+    estado: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+        // required: true,
+        // emun: ["ADMIN_ROLE", "USER_ROLE"]
+    },
+    correo: {
+        type: DataTypes.STRING,
+        // required: true,
+        // emun: ["ADMIN_ROLE", "USER_ROLE"]
+    },
+    refreshToken: {
+        type: DataTypes.STRING,
+        // required: true,
+        // emun: ["ADMIN_ROLE", "USER_ROLE"]
+    },
+    // createdAt: {
+    //     type: DataTypes.DATE,
+    //     // allowNull: false,
+    //     defaultValue: DataTypes.NOW
+    // },
+    // updatedAt: {
+    //     type: DataTypes.DATE,
+    //     // allowNull: false,
+    //     defaultValue: DataTypes.NOW
+    // },
+    google: {
+        type: DataTypes.BOOLEAN,
+        default: false,
+    },
+    img: {
+        type: DataTypes.STRING,
+        // default: false,
+    },
+    createdBy: {
+        type: DataTypes.STRING,
+        // default: false,
+    },
+}
+
+
+const Usuario = handleConnect.define("usuario", schema)
+
+
+Usuario.prototype.toJSON = function () {
+    const { clave, refreshToken, ...usuario } = this.dataValues
+    // usuario.uid = usuario.id;
+    return usuario
+}
+// Usuario.prototype.toJSONClave = function () {
+//     const { refreshToken, ...usuario } = this.dataValues
+//     // usuario.uid = usuario.id;
+//     return usuario
+// }
+
+// schema.toJson = function () {
+//     const { clave, ...usuario } = this.toObject()
+//     return usuario
+// }
+
+module.exports = { Usuario };

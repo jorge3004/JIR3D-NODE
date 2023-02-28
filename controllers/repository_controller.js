@@ -1,5 +1,5 @@
 const { response, request } = require("express");
-const { haddleConnect } = require("../database/config");
+const { haddleConnect } = require("../database/connectionDB");
 const repositoryGet = (req = request, res = response) => {
   // const query = mreq.query;
   // const { name = "no", id = "no id" } = req.query;
