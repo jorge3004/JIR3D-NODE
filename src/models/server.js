@@ -38,7 +38,7 @@ class Server {
     try {
       await handleConnect.authenticate();
       // await handleConnect.sync({ force: true })
-      // await handleConnect.sync({ alter: true })
+      await handleConnect.sync({ alter: true })
       // await handleConnect.sync()
       console.log("DataBase Online")
     } catch (e) {
