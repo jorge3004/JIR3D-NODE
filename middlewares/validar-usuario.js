@@ -7,7 +7,6 @@ const { Op } = require("sequelize");
 const validarUsuario = async (req = request, res = response, next) => {
     const { uid } = req.params
     const usuario = req.body.usuario
-    console.log(uid);
     const existeUsuario = await Usuario.findOne({ where: { uid, estado: true } })
     // const existeUsuario = await Usuario.findOne({ where: { uid, estado: true } })
     if (!existeUsuario) {

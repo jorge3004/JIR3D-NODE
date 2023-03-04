@@ -18,6 +18,7 @@ class Server {
       usuarios: "/usuarios",
       auth: "/auth",
       roles: "/roles",
+      impresoras: "/impresoras"
     };
     this.dbConnection();
     this.middlewares();
@@ -38,7 +39,7 @@ class Server {
       await handleConnect.authenticate();
       // await handleConnect.sync({ force: true })
       // await handleConnect.sync({ alter: true })
-      await handleConnect.sync()
+      // await handleConnect.sync()
       console.log("DataBase Online")
     } catch (e) {
       throw new Error(e)
@@ -50,6 +51,7 @@ class Server {
     this.app.use(this.paths.auth, require("../routes/auth_route"));
     this.app.use(this.paths.usuarios, require("../routes/usuarios_route"));
     this.app.use(this.paths.roles, require("../routes/roles_route"));
+    this.app.use(this.paths.impresoras, require("../routes/impresoras_route"));
   }
   sockets() {
     this.io.on('connection', socketController);

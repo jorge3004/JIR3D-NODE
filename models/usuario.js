@@ -18,6 +18,15 @@ const schema = {
         type: DataTypes.STRING,
         // required: [true, "El nombre es obligatorio"]
     },
+    categoria: {
+        type: DataTypes.STRING,
+    },
+    lastPath: {
+        type: DataTypes.STRING,
+    },
+    page: {
+        type: DataTypes.INTEGER,
+    },
     clave: {
         type: DataTypes.STRING,
         // required: [true, "La clave es obligatorio"]
@@ -38,6 +47,9 @@ const schema = {
         type: DataTypes.STRING,
         // required: true,
         // emun: ["ADMIN_ROLE", "USER_ROLE"]
+    },
+    impresora: {
+        type: DataTypes.STRING,
     },
     refreshToken: {
         type: DataTypes.STRING,
