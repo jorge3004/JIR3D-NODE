@@ -36,10 +36,10 @@ class Server {
   }
   async dbConnection() {
     try {
-      await handleConnect.authenticate();
+      // await handleConnect.authenticate();
       // await handleConnect.sync({ force: true })
-      await handleConnect.sync({ alter: true })
-      // await handleConnect.sync()
+      // await handleConnect.sync({ alter: true })
+      await handleConnect.sync()
       console.log("DataBase Online")
     } catch (e) {
       throw new Error(e)

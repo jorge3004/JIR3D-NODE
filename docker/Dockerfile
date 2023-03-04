@@ -11,5 +11,4 @@ CMD ["node", "app.js"]
 FROM base as dev
 ENV NODE_ENV=development
 RUN npm i -g nodemon && npm i
-# COPY ./src .
 CMD ["npm", "start"]
