@@ -20,9 +20,7 @@ const schema = {
     },
 }
 
-
 const Impresora = handleConnect.define("impresora", schema)
-
 
 // Impresora.prototype.toJSON = function () {
 //     const { clave, refreshToken, ...usuario } = this.dataValues
