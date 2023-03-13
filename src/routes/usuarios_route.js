@@ -6,8 +6,8 @@ const { esRoleValido, emailExiste, existeUsuarioPorId, usuarioExiste } = require
 // const { esAdminRole, tieneRole } = require("../middlewares/validar-roles");
 const {
   validarCampos,
-  validarJWT,
-  tieneRole
+  // validarJWT,
+  // tieneRole
 } = require("../middlewares")
 const {
   getUsuarios,
@@ -16,10 +16,11 @@ const {
   putUsuario,
   deleteUsuario
 } = require("../controllers/usuarios_controller");
-const { validarUsuario } = require("../middlewares/validar-usuario");
+const { validarUsuario, validarUsuarioGet } = require("../middlewares/validar-usuario");
 
 const router = Router();
 router.get("/", getUsuarios);
+router.get("/:uid", validarUsuarioGet, getUsuarios);
 router.get("/:id", getUsuario);
 router.post("/", [
   // check("correo", "El correo no es valido").isEmail(),
@@ -34,7 +35,6 @@ router.post("/", [
 router.put("/:uid", [
   // check("uid").custom(existeUsuarioUpdate),
   validarUsuario,
-  validarCampos
 ], putUsuario);
 router.delete("/:uid", [
   // validarJWT,

@@ -68,8 +68,7 @@ const googleSignIn = async (req, res) => {
         google: true
       }
       usuario = new Usuario(data)
-      const usr = await usuario.save()
-      uid = usr.uid
+      await usuario.save()
     }
 
     if (usuario.refreshToken) {

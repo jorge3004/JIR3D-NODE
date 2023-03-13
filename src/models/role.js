@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { handleConnect } = require('../database/connectionDB');
+const { sequelize_JIR3D } = require('../database/connectionDB');
 
 
 const schema = {
@@ -8,6 +8,6 @@ const schema = {
         required: true
     },
 }
-const Role = handleConnect.define("role", schema)
+const Role = sequelize_JIR3D.define("role", schema)
 
 module.exports = { Role };

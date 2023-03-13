@@ -1,8 +1,13 @@
 const { response, request } = require("express");
 const bcryptjs = require('bcryptjs')
 const { Usuario } = require("../models/usuario");
+const { Op } = require("sequelize");
+
 
 const getUsuarios = async (req = request, res = response) => {
+    // const { admin } = req.query
+    // const { uid } = req.params
+    // const adminCheck = admin === "true"
     const { per_page = null } = req.query
     let arg = per_page === null ? {} : (per_page !== "" && Number.isInteger(Number(per_page))) ? { limit: Number(per_page) } : false
     if (arg) {
@@ -10,12 +15,18 @@ const getUsuarios = async (req = request, res = response) => {
         let fJson = {}
         arg.where = { estado: true }
         if (limit === null) {
+            // if (admin) {
             const { count, rows } = await Usuario.findAndCountAll(arg)
             fJson = { total: count, usuarios: rows }
+            // } else {
+            //     const { count, rows } = await Usuario.findAll({
+            //         where: { estado: true, [Op.or]: [{ createdBy: uid }, { uid }] }, attributes: ['uid']
+            //     })
+            //     fJson = { total: count, usuarios: rows }
+            // }
         } else {
             const usuarios = await Usuario.findAll(arg)
             fJson = { total: Object.keys(usuarios).length, usuarios }
-
         }
         res.json(fJson);
     } else {
@@ -38,10 +49,9 @@ const postUsuario = async (req = request, res = response) => {
     // const { usuario,clave } = req.body
     try {
         const usuario = new Usuario(body)
-        // console.log(usuario)
         const salt = bcryptjs.genSaltSync()
         usuario.clave = bcryptjs.hashSync(body.clave, salt)
-        await usuario.save()
+        const resp = await usuario.save()
         res.json(usuario)
     } catch (e) {
         console.log(e)

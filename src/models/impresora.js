@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { handleConnect } = require('../database/connectionDB');
+const { sequelize_JIR3D } = require('../database/connectionDB');
 
 
 const schema = {
@@ -20,7 +20,7 @@ const schema = {
     },
 }
 
-const Impresora = handleConnect.define("impresora", schema)
+const Impresora = sequelize_JIR3D.define("impresora", schema)
 
 // Impresora.prototype.toJSON = function () {
 //     const { clave, refreshToken, ...usuario } = this.dataValues

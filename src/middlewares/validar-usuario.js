@@ -6,9 +6,8 @@ const { Op } = require("sequelize");
 
 const validarUsuario = async (req = request, res = response, next) => {
     const { uid } = req.params
-    const usuario = req.body.usuario
+    const { usuario } = req.body
     const existeUsuario = await Usuario.findOne({ where: { uid, estado: true } })
-    // const existeUsuario = await Usuario.findOne({ where: { uid, estado: true } })
     if (!existeUsuario) {
         return res.status(401).json({
             msg: `El usuario: ${usuario} no existe`
@@ -26,7 +25,11 @@ const validarUsuario = async (req = request, res = response, next) => {
     req.usuario = existeUsuario
     next()
 }
+const validarUsuarioGet = (req = request, res = response, next) => {
+
+}
 
 module.exports = {
-    validarUsuario
+    validarUsuario,
+    validarUsuarioGet
 }

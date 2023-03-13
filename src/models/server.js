@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { handleConnect } = require("../database/connectionDB");
+const { sequelize_JIR3D, db_carrito } = require("../database/connectionDB");
 const cors = require("cors");
 const { socketController } = require("../sockets/controller_sockets");
 
@@ -18,7 +18,9 @@ class Server {
       usuarios: "/usuarios",
       auth: "/auth",
       roles: "/roles",
-      impresoras: "/impresoras"
+      impresoras: "/impresoras",
+      carrito: "/carrito",
+      ordenes: "/ordenes"
     };
     this.dbConnection();
     this.middlewares();
@@ -36,13 +38,21 @@ class Server {
   }
   async dbConnection() {
     try {
-      // await handleConnect.authenticate();
-      // await handleConnect.sync({ force: true })
-      // await handleConnect.sync({ alter: true })
-      await handleConnect.sync()
+      await sequelize_JIR3D.authenticate();
+      // await db_carrito.authenticate()
+      // await sequelize_JIR3D.sync({ force: true })
+      // await db_carrito.sync({ force: true })
+      // await sequelize_JIR3D.sync{ alter: true })
+      // await db_carrito.sync({ alter: true })
+      // await db_carrito.sync()
+      // await sequelize_JIR3D.sync()
       console.log("DataBase Online")
     } catch (e) {
-      throw new Error(e)
+      console.log("reconnecting ...");
+      setTimeout(() => {
+        this.dbConnection()
+      }, 5000);
+      // throw new Error(e)
     }
   }
   routes() {
@@ -52,6 +62,8 @@ class Server {
     this.app.use(this.paths.usuarios, require("../routes/usuarios_route"));
     this.app.use(this.paths.roles, require("../routes/roles_route"));
     this.app.use(this.paths.impresoras, require("../routes/impresoras_route"));
+    this.app.use(this.paths.carrito, require("../routes/carrito_route"));
+    this.app.use(this.paths.ordenes, require("../routes/ordenes_route"));
   }
   sockets() {
     this.io.on('connection', socketController);

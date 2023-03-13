@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { handleConnect } = require('../database/connectionDB');
+const { sequelize_JIR3D } = require('../database/connectionDB');
 
 
 const schema = {
@@ -56,6 +56,10 @@ const schema = {
         // required: true,
         // emun: ["ADMIN_ROLE", "USER_ROLE"]
     },
+    darkMode: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
     // createdAt: {
     //     type: DataTypes.DATE,
     //     // allowNull: false,
@@ -81,7 +85,7 @@ const schema = {
 }
 
 
-const Usuario = handleConnect.define("usuario", schema)
+const Usuario = sequelize_JIR3D.define("usuario", schema)
 
 
 Usuario.prototype.toJSON = function () {
